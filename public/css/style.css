@@ -1,4 +1,60 @@
 body {
   font-family: 'Lato', sans-serif;
-  color:red;
+  padding-top: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.glyphicon {
+  margin-right: 5px;
+}
+
+.navbar {
+  box-shadow: 2px 2px 5px #888888;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+  color:white;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover {
+  color:#33C8FE;
+}
+
+.logo {
+  vertical-align: middle;
+  line-height: 50px;
+  color:#00A5F7;
+  font-size: 1.2em;
+  margin-right: 30px;
+}
+
+.addCard {
+  margin-top: 20px;
+  margin-left: -13px;
+  background-color:#00A5F7;
+  color:white;
+  border: none;
+  padding: 5px 40px;
+}
+
+.addCard:hover {
+  background-color:#33C8FE;
+  color:white;
+}
+
+.search {
+  margin-top: 20px;
+}
+
+.glyphicon-pencil {
+  color: #00A5F7;
+}
+
+.glyphicon-remove {
+  color: darkred;
+}
+
+.panel {
+  margin-top: 20px;
 }

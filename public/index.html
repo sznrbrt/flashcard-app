@@ -18,7 +18,21 @@
   <script src="/js/services.js"></script>
   <!-- <script src="/js/filters.js"></script> -->
 </head>
-<body>
-  <h1>Hello</h1>
+<body ng-app='flashCardApp'>
+
+  <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class="active logo"><span class="glyphicon glyphicon-text-background"></span>FlashCards App</li>
+        <li><a href="#"><span class="glyphicon glyphicon-book"></span>FlashCards</a></li>
+        <li><a ui-sref="products"><span class="glyphicon glyphicon-education"></span>Start Quiz</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Where the templates go -->
+  <ui-view></ui-view>
+  <!--  -->
+
 </body>
 </html>

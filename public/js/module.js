@@ -1,0 +1,20 @@
+'use strict';
+
+var app = angular.module('flashCardApp', ['ui.router', 'ui.bootstrap']);
+
+app.config(function($stateProvider, $urlRouterProvider){
+
+  $stateProvider
+    .state('cards', {
+      url:'/',
+      templateUrl: '/html/cards.html',
+      controller: 'cardsCtrl',
+    })
+    .state('editcard', {
+      url:'/editcard/:id',
+      templateUrl: '/html/editcard.html',
+      controller: 'editcardCtrl',
+    })
+
+  $urlRouterProvider.otherwise('/');
+});
