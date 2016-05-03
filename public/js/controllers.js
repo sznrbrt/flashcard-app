@@ -71,7 +71,7 @@ app.controller('editcardCtrl', function($scope, $rootScope, FlashCards, $state, 
   }
 
   $scope.reset = function() {
-    $scope.newCard = data;
+    $scope.newCard = angular.copy(data);
   }
 
   $scope.editCard = function() {
