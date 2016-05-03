@@ -2,7 +2,7 @@
 
 var app = angular.module('flashCardApp');
 
-app.controller('cardsCtrl', function($scope, $rootScope, FlashCards, $state, $stateParams, StoreData) {
+app.controller('cardsCtrl', function($scope, $rootScope, FlashCards, $state, $stateParams, StoreData, QuestionBank) {
   console.log('cardsCtrl!');
   $scope.newCard = {};
   FlashCards.getAll()
@@ -10,6 +10,7 @@ app.controller('cardsCtrl', function($scope, $rootScope, FlashCards, $state, $st
     $scope.flashcards = res.data;
     $scope.categories = [];
     var categories = res.data.map((e) => e.category).sort().forEach((e) => {if($scope.categories.indexOf(e) === -1) $scope.categories.push(e)})
+    QuestionBank.set($scope.flashcards);
   })
   .catch(err => {
     console.error(err);
@@ -42,6 +43,7 @@ app.controller('cardsCtrl', function($scope, $rootScope, FlashCards, $state, $st
     FlashCards.create(newCard)
     .then((res) => {
       $scope.flashcards.push(res.data);
+      QuestionBank.set($scope.flashcards);
     });
 
     $scope.newCard = {};
@@ -79,6 +81,47 @@ app.controller('editcardCtrl', function($scope, $rootScope, FlashCards, $state, 
       console.log('success');
       $state.go('cards');
     })
+  }
+
+})
+
+app.controller('quizCtrl', function($scope, $rootScope, FlashCards, $state, $stateParams, StoreData, QuestionBank) {
+  console.log('quizCtrl');
+  $scope.checkboxModel = {};
+  var questions = QuestionBank.get();
+  $scope.categories = [];
+  console.log($scope.categories);
+  var categories = questions.map((e) => e.category).sort().forEach((e) => {if($scope.categories.indexOf(e) === -1) $scope.categories.push(e)});
+  if($scope.categories.length === 0) $state.go('cards');
+  $scope.quizStarted = false;
+
+  $scope.startQuiz = () => {
+    var topics = [];
+    for(var topic in $scope.checkboxModel){
+      if($scope.checkboxModel[topic]) topics.push(topic);
+    }
+    $scope.questionPool = questions.filter((q) => {return topics.indexOf(q.category) !== -1});;
+
+    $scope.quizStarted = true;
+    $scope.currentQuestionIndex = 0;
+    $scope.seeAnswer = false;
+    $scope.currentQuestion = $scope.questionPool[$scope.currentQuestionIndex];
+  }
+
+  $scope.showAnswer = () => {
+    $scope.seeAnswer = true;
+  }
+  $scope.nextQ = () => {
+    $scope.currentQuestionIndex ++;
+    $scope.currentQuestion = $scope.questionPool[$scope.currentQuestionIndex];
+    $scope.seeAnswer = false;
+
+    if($scope.currentQuestionIndex > ($scope.questionPool.length - 1))
+      $scope.testFinished = true;
+  }
+
+  $scope.goHome = () => {
+    $state.go('cards');
   }
 
 })

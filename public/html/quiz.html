@@ -1,0 +1,62 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12" ng-if="!quizStarted">
+      <h1>First, select categories</h1>
+      <form class="form-horizontal quiz" role="form">
+        <div class="form-group">
+          <label class="control-label col-sm-2">Categories:</label>
+          <div class="col-sm-10">
+            <div class="checkbox" ng-repeat="category in categories track by $index">
+              <label><input type="checkbox" ng-model="checkboxModel[category]">{{ category }}</label>
+            </div>
+           <button class="btn btn-success startQuiz" ng-click="startQuiz()">Start Quiz</button>
+         </div>
+       </div>
+      </form>
+    </div>
+
+    <div class="col-xs-12" ng-if="quizStarted && !testFinished">
+      <div class="row text-center">
+        <div class="panel panel-default">
+          <div class="panel-heading">{{ currentQuestion.category }}</div>
+          <div class="panel-body">
+            <div class="row question">
+              {{ currentQuestion.question }}
+            </div>
+            <div class="row answer" ng-if="seeAnswer">
+              {{ currentQuestion.answer }}
+            </div>
+            <div class="row text-right">
+              <button class="btn btn-primary seeAns" ng-click="showAnswer()" ng-if="!seeAnswer">
+                See Answer
+              </button>
+              <button class="btn btn-success seeAns" ng-click="nextQ()" ng-if="seeAnswer">
+                Next Card
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12" ng-if="quizStarted && testFinished">
+      <div class="row text-center">
+        <div class="panel panel-default">
+          <div class="panel-heading"></div>
+          <div class="panel-body">
+            <div class="row question">
+              You killed all the flashcards.
+            </div>
+            <div class="row answer">
+              Keep in mind, practice makes the master.
+            </div>
+            <div class="row text-right">
+              <button class="btn btn-primary seeAns" ng-click="goHome()">
+                Go back
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

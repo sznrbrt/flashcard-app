@@ -15,6 +15,11 @@ app.config(function($stateProvider, $urlRouterProvider){
       templateUrl: '/html/editcard.html',
       controller: 'editcardCtrl',
     })
+    .state('quiz', {
+      url:'/quiz',
+      templateUrl: '/html/quiz.html',
+      controller: 'quizCtrl',
+    })
 
   $urlRouterProvider.otherwise('/');
 });

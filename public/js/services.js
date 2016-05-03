@@ -30,3 +30,16 @@ app.service('StoreData', function($http) {
     storeData = data;
   }
 })
+
+app.service('QuestionBank', function() {
+
+  var questions = [];
+
+  this.get = () => {
+    return questions;
+  }
+
+  this.set = (data) => {
+    questions = data;
+  }
+})
