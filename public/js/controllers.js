@@ -24,7 +24,6 @@ app.controller('cardsCtrl', function($scope, $rootScope, FlashCards, $state, $st
   $scope.removeItem = function (card) {
     var index = $scope.flashcards.indexOf(card);
     var id = card._id;
-    console.log(index);
     FlashCards.delete(id)
     .then(() => {
       $scope.flashcards.splice(index, 1);
@@ -78,7 +77,6 @@ app.controller('editcardCtrl', function($scope, $rootScope, FlashCards, $state, 
     var input = $scope.newCard;
     FlashCards.edit(input._id, input)
     .then(() => {
-      console.log('success');
       $state.go('cards');
     })
   }
@@ -90,7 +88,7 @@ app.controller('quizCtrl', function($scope, $rootScope, FlashCards, $state, $sta
   $scope.checkboxModel = {};
   var questions = QuestionBank.get();
   $scope.categories = [];
-  console.log($scope.categories);
+
   var categories = questions.map((e) => e.category).sort().forEach((e) => {if($scope.categories.indexOf(e) === -1) $scope.categories.push(e)});
   if($scope.categories.length === 0) $state.go('cards');
   $scope.quizStarted = false;
