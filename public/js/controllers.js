@@ -89,7 +89,7 @@ app.controller('quizCtrl', function($scope, $rootScope, FlashCards, $state, $sta
   var questions = QuestionBank.get();
   $scope.categories = [];
 
-  var categories = questions.map((e) => e.category).sort().forEach((e) => {if($scope.categories.indexOf(e) === -1) $scope.categories.push(e)});
+  var categories = questions.map((e) => e.category).forEach((e) => {if($scope.categories.indexOf(e) === -1) $scope.categories.push(e)});
   if($scope.categories.length === 0) $state.go('cards');
   $scope.quizStarted = false;
 
