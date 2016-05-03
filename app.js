@@ -8,6 +8,14 @@ var bodyParser = require('body-parser');
 var http = require('http');
 var path = require('path');
 
+var mongoose = require('mongoose');
+
+const MONGOURL = 'mongodb://localhost/mongo-express';
+
+mongoose.connect(MONGOURL, err => {
+  console.log(err || `Connected to MongoDB at ${MONGOURL}`);
+});
+
 var app = express();
 
 app.use(morgan('dev'));
